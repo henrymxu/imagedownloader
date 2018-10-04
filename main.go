@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"github.com/henrymxu/imagedownloader/imgsrcs"
 	"github.com/henrymxu/imagedownloader/utils/network"
+	"github.com/henrymxu/imagedownloader/utils/program"
 	"github.com/henrymxu/imagedownloader/utils/storage"
 	"strings"
 	"sync"
@@ -15,17 +16,17 @@ var goroutineCount int
 
 var search string
 var folder string
-var excludeSearch arrayFlags
+var excludeSearch program.FlagArray
 
 // params: config file path, search, folder name, number of images, tags to exclude ...
 func main() {
-	params := getProgramParams()
+	params := program.GetInitialParams()
 
-	configPath := params.configPath
-	search = params.search
-	folder = params.folder
-	count = params.count
-	excludeSearch = params.excludes
+	configPath := params.ConfigPath
+	search = params.Search
+	folder = params.Folder
+	count = params.Count
+	excludeSearch = params.Excludes
 
 	config := storage.LoadConfig(configPath)
 	goroutineCount = config.GoRoutineCount
