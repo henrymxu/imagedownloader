@@ -1,0 +1,6 @@
+FlickrApiKey = "<your_key_here>"
+
+ImagesFolder = "/Documents/ImageSet"
+ImagesNameFormat = "image_%s"
+
+GoRoutineCount = 50

@@ -1,0 +1,15 @@
+# GoLand project files
+.idea
+*.iml
+out
+gen
+
+.DS_Store
+
+# Generated Python Files
+
+
+# Config file
+config.toml
+
+imagedownloader
