@@ -1,12 +1,12 @@
-#Image Downloader
+# Image Downloader
 
 Program to download large amounts of images from public image sources
 
-#Currently supported Image sources
+# Currently supported Image sources
 
 - Flickr
 
-#Example usage
+# Example usage
 
 ./imagedownloader -cfg=config/config.toml "-search=porsche 918" -folder=porsche918 -count=250 -exclude=911 -exclude=turbo
 
@@ -16,12 +16,12 @@ Program to download large amounts of images from public image sources
 - count = number of images to download
 - exclude = keywords that should be excluded from search
 
-#Config
+# Config
 - FlickrApiKey = ApiKey required to use Flickr services
 - ImagesFolder = Desired path relative to home directory to hold folders (Do not include home directory in path)
 - ImagesNameFormat = Format for names of images, if `%s` is not provided, `_%s` will be appended to the end
 - GoRoutineCount = Number of goroutines created for http requests
 
-#License
+# License
 
 MIT
