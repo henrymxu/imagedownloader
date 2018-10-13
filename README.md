@@ -8,7 +8,11 @@ Program to download large amounts of images from public image sources
 
 # Example usage
 
-`./imagedownloader -cfg=config/config.toml "-search=porsche 918" -folder=porsche918 -count=250 -exclude=911 -exclude=turbo`
+See `_examples/main.go`
+
+# Example command line usage
+
+`./_examples -cfg=config.toml "-search=porsche 918" -folder=porsche918 -count=250 -exclude=911 -exclude=turbo`
 
 - cfg = location of config file, follow the template provided in `config_example.toml`
 - search = keyword for images
