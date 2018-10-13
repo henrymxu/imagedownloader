@@ -1,13 +1,24 @@
+# Binaries for programs and plugins
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+
+# Test binary, build with `go test -c`
+*.test
+
+# Output of the go coverage tool, specifically when used with LiteIDE
+*.out
+
 # GoLand project files
 .idea
 *.iml
 out
 gen
 
+# Mac Stuff
 .DS_Store
-
-# Generated Python Files
-
 
 # Config file
 config.toml
