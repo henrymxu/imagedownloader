@@ -1,6 +1,6 @@
 FlickrApiKey = "<your_key_here>"
 
 ImagesFolder = "/Documents/ImageSet"
-ImagesNameFormat = "image_%s"
+ImagesNameFormat = "image_%d.jpg"
 
 GoRoutineCount = 50

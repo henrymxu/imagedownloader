@@ -23,8 +23,7 @@ func New(apiKey string) flickr {
 	params["format"] = "json"
 	params["nojsoncallback"] = "1"
 	params["per_page"] = strconv.Itoa(flickrMaxImages)
-	f := flickr{params}
-	return f
+	return flickr{params}
 }
 
 // Initial flickr rest call returns list of images with various properties including server, farm, id, etc.

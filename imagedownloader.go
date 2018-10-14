@@ -15,15 +15,13 @@ type imagedownloader struct {
 }
 
 func New(source imagesources.ImageSource, goroutineCount int) imagedownloader {
-	o := imagedownloader{source, goroutineCount}
-	return o
+	return imagedownloader{source, goroutineCount}
 }
 
 func (imgdlr imagedownloader) DownloadImages(path string, count int, search string, excludes []string) {
 	urls := imgdlr.source.GetImageUrls(count, search, excludes...)
 	imgdlr.downloadAllImages(path, urls)
 }
-
 
 func (imgdlr imagedownloader) downloadAllImages(path string, imageurls []string) {
 	start := time.Now()
