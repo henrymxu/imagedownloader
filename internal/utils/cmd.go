@@ -7,6 +7,7 @@ import (
 
 type Params struct {
 	ConfigPath  string
+	Source      string
 	Search      string
 	Folder      string
 	ImageFormat string
@@ -27,6 +28,7 @@ func (i *FlagArray) Set(value string) error {
 
 func GetInitialParams() *Params {
 	configPath := flag.String("cfg", "config.toml", "config file path")
+	source := flag.String("source", "flickr", "source for images (flickr)")
 	search := flag.String("search", "", "search keyword")
 	folder := flag.String("folder", "", "name of the folder")
 	imageFormat := flag.String("format", "image_%d.jpg", "image file format name")
@@ -48,6 +50,7 @@ func GetInitialParams() *Params {
 
 	return &Params{
 		*configPath,
+		*source,
 		*search,
 		*folder,
 		*imageFormat,

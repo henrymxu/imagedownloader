@@ -1,9 +1,10 @@
 package main
 
 import (
-	"github.com/henrymxu/imagedownloader/imgdwnlder"
-	"github.com/henrymxu/imagedownloader/imgsrcs"
-	"github.com/henrymxu/imagedownloader/utils"
+	"fmt"
+	"github.com/henrymxu/imagedownloader/downloader"
+	"github.com/henrymxu/imagedownloader/internal/sources"
+	"github.com/henrymxu/imagedownloader/internal/utils"
 )
 
 // params: config file path, search, folder name, number of images, tags to exclude ...
@@ -14,18 +15,19 @@ func main() {
 	}
 
 	config := utils.LoadConfig(params.ConfigPath)
-	if config == nil {
-		return
-	}
 
 	// Create an ImageSource
 	var imageSource imagesources.ImageSource
-	imageSource = imagesources.New(config.FlickrApiKey)
+	if params.Source == "flickr" {
+		imageSource = imagesources.New(config.FlickrApiKey)
+	}
+
+	if imageSource == nil {
+		fmt.Printf("Invalid Image Source (%s)\n", params.Source)
+		return
+	}
 
 	path := utils.BuildPathFromParams(params.ImageFormat, params.Folder)
-
-	// Run Image Downloader
-	var imgdlr = imgdwnlder.New(imageSource, 50)
-	imgdlr.DownloadImages(path, params.Count, params.Search, params.Excludes)
+	imagedownloader.DownloadImages(imageSource, path, params.Count, params.Search, params.Excludes)
 }
 

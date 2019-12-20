@@ -3,7 +3,7 @@ package imagesources
 import (
 	"encoding/json"
 	"fmt"
-	"github.com/henrymxu/imagedownloader/utils"
+	"github.com/henrymxu/imagedownloader/internal/utils"
 	"strconv"
 	"strings"
 )
