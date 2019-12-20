@@ -1,4 +1,4 @@
-package imagedownloader
+package main
 
 import (
 	"fmt"
@@ -10,7 +10,7 @@ import (
 )
 
 type imagedownloader struct {
-	source imagesources.ImageSource
+	source         imagesources.ImageSource
 	goroutineCount int
 }
 
@@ -50,11 +50,11 @@ func (imgdlr imagedownloader) splitUpImageUrls(count int, imageUrls []string) []
 	}
 	var imageUrlMaps = make([]map[string]int, count)
 	for i := 0; i < len(imageUrls); i += count {
-		for j := i; j < i + count; j++ {
-			if imageUrlMaps[j - i] == nil {
-				imageUrlMaps[j - i] = make(map[string]int)
+		for j := i; j < i+count; j++ {
+			if imageUrlMaps[j-i] == nil {
+				imageUrlMaps[j-i] = make(map[string]int)
 			}
-			imageUrlMaps[j - i][imageUrls[j]] = j
+			imageUrlMaps[j-i][imageUrls[j]] = j
 		}
 	}
 	return imageUrlMaps

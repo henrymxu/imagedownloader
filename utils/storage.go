@@ -1,4 +1,4 @@
-package storage
+package utils
 
 import (
 	"github.com/BurntSushi/toml"
@@ -11,7 +11,7 @@ import (
 type Config struct {
 	FlickrApiKey string
 
-	ImagesFolder string
+	ImagesFolder     string
 	ImagesNameFormat string
 
 	GoRoutineCount int
