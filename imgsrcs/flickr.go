@@ -3,7 +3,7 @@ package imagesources
 import (
 	"encoding/json"
 	"fmt"
-	"github.com/henrymxu/imagedownloader/utils/network"
+	"github.com/henrymxu/imagedownloader/utils"
 	"strconv"
 	"strings"
 )
@@ -42,7 +42,7 @@ func (flickr flickr) GetImageUrls(count int, search string, excludes ...string) 
 	var pages = count/flickrMaxImages + 1
 	for i := 1; i <= pages; i++ {
 		flickr.params["page"] = strconv.Itoa(i)
-		response := network.MakeRequestWithQuery(baseUrl, flickr.params)
+		response := utils.MakeRequestWithQuery(baseUrl, flickr.params)
 		allImageUrls = append(allImageUrls, parseHttpResponse(response)...)
 	}
 	return allImageUrls[:count]

@@ -2,14 +2,16 @@ package utils
 
 import (
 	"flag"
+	"fmt"
 )
 
 type Params struct {
-	ConfigPath string
-	Search     string
-	Folder     string
-	Count      int
-	Excludes   FlagArray
+	ConfigPath  string
+	Search      string
+	Folder      string
+	ImageFormat string
+	Count       int
+	Excludes    FlagArray
 }
 
 type FlagArray []string
@@ -23,19 +25,32 @@ func (i *FlagArray) Set(value string) error {
 	return nil
 }
 
-func GetInitialParams() Params {
+func GetInitialParams() *Params {
 	configPath := flag.String("cfg", "config.toml", "config file path")
-	search := flag.String("search", "", "tag")
+	search := flag.String("search", "", "search keyword")
 	folder := flag.String("folder", "", "name of the folder")
-	searchCount := flag.Int("count", 0, "number of images")
+	imageFormat := flag.String("format", "image_%d.jpg", "image file format name")
+	searchCount := flag.Int("count", 250, "number of images")
 
 	var excludeSearch FlagArray
 	flag.Var(&excludeSearch, "exclude", "Tags that should be excluded from search")
 	flag.Parse()
-	return Params{
+
+	if *search == "" {
+		fmt.Println("No search provided, please provide a search")
+		return nil
+	}
+
+	if *folder == "" {
+		fmt.Println("No folder provided, please provide a folder")
+		return nil
+	}
+
+	return &Params{
 		*configPath,
 		*search,
 		*folder,
+		*imageFormat,
 		*searchCount,
 		excludeSearch,
 	}

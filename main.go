@@ -1,41 +1,31 @@
 package main
 
 import (
-	"fmt"
-	"github.com/henrymxu/imagedownloader"
+	"github.com/henrymxu/imagedownloader/imgdwnlder"
 	"github.com/henrymxu/imagedownloader/imgsrcs"
-	"github.com/henrymxu/imagedownloader/utils/program"
-	"github.com/henrymxu/imagedownloader/utils/storage"
-	"strings"
+	"github.com/henrymxu/imagedownloader/utils"
 )
 
 // params: config file path, search, folder name, number of images, tags to exclude ...
 func main() {
-	params := program.GetInitialParams()
+	params := utils.GetInitialParams()
+	if params == nil {
+		return
+	}
 
-	configPath := params.ConfigPath
-	search := params.Search
-	folder := params.Folder
-	count := params.Count
-	excludesearch := params.Excludes
-
-	config := storage.LoadConfig(configPath)
-	goroutineCount := config.GoRoutineCount
+	config := utils.LoadConfig(params.ConfigPath)
+	if config == nil {
+		return
+	}
 
 	// Create an ImageSource
 	var imageSource imagesources.ImageSource
 	imageSource = imagesources.New(config.FlickrApiKey)
 
-	// Configure path from parameters
-	imageNameFormat := config.ImagesNameFormat
-	if !strings.Contains(imageNameFormat, "%d") {
-		imageNameFormat = fmt.Sprintf("%s_%%d.jpg", imageNameFormat)
-	}
-	imageFolder := fmt.Sprintf("%s/%s", config.ImagesFolder, folder)
-	path := fmt.Sprintf("%s/%s/%s", storage.GetHomeDir(), imageFolder, imageNameFormat)
+	path := utils.BuildPathFromParams(params.ImageFormat, params.Folder)
 
 	// Run Image Downloader
-	var imgdlr = imagedownloader.New(imageSource, goroutineCount)
-	imgdlr.DownloadImages(path, count, search, excludesearch)
+	var imgdlr = imgdwnlder.New(imageSource, 50)
+	imgdlr.DownloadImages(path, params.Count, params.Search, params.Excludes)
 }
 
