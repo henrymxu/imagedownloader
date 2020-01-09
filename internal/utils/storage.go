@@ -44,17 +44,6 @@ func SaveToDisc(contents []byte, path string) bool {
 	return true
 }
 
-func ReadFromDisc(path string) []byte {
-	data, err := ioutil.ReadFile(path)
-	check(err)
-	return data
-}
-
-func MoveFile(originalPath string, newPath string) {
-	err := os.Rename(originalPath, newPath)
-	check(err)
-}
-
 func GetHomeDir() string {
 	usr, err := user.Current()
 	check(err)

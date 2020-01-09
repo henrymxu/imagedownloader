@@ -2,8 +2,8 @@ package main
 
 import (
 	"fmt"
-	"github.com/henrymxu/imagedownloader/downloader"
-	"github.com/henrymxu/imagedownloader/internal/sources"
+	imagedownloader "github.com/henrymxu/imagedownloader/downloader"
+	imagesources "github.com/henrymxu/imagedownloader/internal/sources"
 	"github.com/henrymxu/imagedownloader/internal/utils"
 )
 
@@ -18,8 +18,11 @@ func main() {
 
 	// Create an ImageSource
 	var imageSource imagesources.ImageSource
-	if params.Source == "flickr" {
-		imageSource = imagesources.New(config.FlickrApiKey)
+	switch params.Source {
+	case "flickr":
+		imageSource = imagesources.NewFlickrSource(config.FlickrApiKey)
+	case "google":
+		imageSource = imagesources.NewGoogleSource()
 	}
 
 	if imageSource == nil {
@@ -30,4 +33,3 @@ func main() {
 	path := utils.BuildPathFromParams(params.ImageFormat, params.Folder)
 	imagedownloader.DownloadImages(imageSource, path, params.Count, params.Search, params.Excludes)
 }
-

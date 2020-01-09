@@ -38,7 +38,7 @@ func downloadAllImages(path string, imageurls []string) {
 		}()
 	}
 	wg.Wait()
-	fmt.Printf("%.2fs elapsed, %d images downloaded\n", time.Since(start).Seconds(), images + 1)
+	fmt.Printf("%.2fs elapsed, %d images downloaded\n", time.Since(start).Seconds(), images)
 }
 
 // This function splits up the list of image urls into smaller maps so a single goroutine can service multiple images

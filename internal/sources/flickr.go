@@ -16,19 +16,19 @@ type flickr struct {
 	params map[string]string
 }
 
-func New(apiKey string) flickr {
+func NewFlickrSource(apiKey string) *flickr {
 	params := make(map[string]string)
 	params["api_key"] = apiKey
 	params["method"] = "flickr.photos.search"
 	params["format"] = "json"
 	params["nojsoncallback"] = "1"
 	params["per_page"] = strconv.Itoa(flickrMaxImages)
-	return flickr{params}
+	return &flickr{params}
 }
 
 // Initial flickr rest call returns list of images with various properties including server, farm, id, etc.
 // Image urls are then constructed using these properties
-func (flickr flickr) GetImageUrls(count int, search string, excludes ...string) []string {
+func (flickr *flickr) GetImageUrls(count int, search string, excludes ...string) []string {
 	tags := strings.Builder{}
 	if excludes != nil {
 		for _, exclude := range excludes {
